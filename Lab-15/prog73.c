@@ -28,6 +28,7 @@ void main(){
                 break;
             case 2:
                 deleteAlt();
+                printf("inside main");
                 display();
                 break;
             case 3:
@@ -67,14 +68,17 @@ void deleteAlt(){
         int count=0;
         while(save!=NULL){
             struct node *next=save->rptr;
-            if(count%2==0){
+            if(count%2!=0){
                 if(save->lptr!=NULL){
-                    next->rptr=save->rptr;
+                    save->lptr->rptr=next;
                 }
                 if(save->rptr!=NULL){
                     next->lptr=save->lptr;
                 }
+                free(save);
             }
+            save=next;
+            count++;
         }
     }
 }
