@@ -17,33 +17,46 @@ struct node *first=NULL;
 void insertAtFirst(int x){
     struct node *newNode=(struct node*)malloc(sizeof(struct node));
     newNode->info=x;
-    newNode->link=first;
-    first=newNode;
+    if(first==NULL){
+        first=newNode;
+        newNode->link=NULL;
+    }
+    else{
+        newNode->link=first;
+        first=newNode;
+    }
     choice();
 }
-void display(){ 
-    struct node *newNode=(struct node*)malloc(sizeof(struct node));
-    struct node *save=first;
-    while(save->link!=NULL){
-        printf("%d,",save->info);
-        save=save->link;
+void display(){
+    if(first==NULL){
+        printf("Empty Linked List");
+    }
+    else{
+        struct node *save=first;
+        while(save!=NULL){
+            printf("%d,",save->info);
+            save=save->link;
+        }
     }
     choice();
 }
 void deleteAtFirst(int x){
-    struct node *save=first;
-    first=save->link;
-    save->link=NULL;
-    free(save);
+    if(first==NULL){    
+        printf("Empty List");
+    }
+    else{
+        struct node *save=first;
+        first=save->link;
+        save->link=NULL;
+        free(save);
+    }
     choice();
 }
 void insertAtLast(int x){
     struct node *newNode=(struct node*)malloc(sizeof(struct node));
     newNode->info=x;
-    newNode->link=NULL;
     if(first==NULL){
         first=newNode;
-        return;
     }
     else{
         struct node *save=first;
@@ -51,16 +64,16 @@ void insertAtLast(int x){
             save=save->link;
         }
         save->link=newNode;
-        return;
+        newNode->link=NULL;
     }    
     choice();
 }
 void deleteAtLast(int x){
-    if(first==NULL)
+    if(first==NULL)//empty list
     {
-        return;
+        printf("Empty List");
     }
-    else if(first->link==NULL){
+    else if(first->link==NULL){//only single element
         free(first);
         first=NULL;
     }
@@ -80,7 +93,7 @@ void deletePosition(int x){
     struct node *save=first;
     struct node *pred=NULL;
     if(first==NULL){
-        return;
+        printf("Empty List");
     }
     else if(first->link==NULL){
         free(first);
@@ -104,12 +117,12 @@ void countNode(){
         save=save->link;
         a++;
     }
-    printf("Number of Elements:%d",a);
+    printf("Number of Elements:%d",(a+1));//as a is intitalized by 0
     choice();
 }
 void choice(){
     int choice;
-    printf("Enter operation:\n1.Insert a node at the front of the linked list.\n2.Display all nodes.\n3.Delete a first node of the linked list.\n4.Insert a node at the end of the linked list.\n5Delete a last node of the linked list.\n6.Delete a node from specified position.\n7.count the number of nodes\n8.Exit\n");
+    printf("\nEnter operation:\n1.Insert a node at the front of the linked list.\n2.Display all nodes.\n3.Delete a first node of the linked list.\n4.Insert a node at the end of the linked list.\n5.Delete a last node of the linked list.\n6.Delete a node from specified position.\n7.count the number of nodes\n8.Exit\n");
     scanf("%d",&choice);
     int x;
     switch(choice){
