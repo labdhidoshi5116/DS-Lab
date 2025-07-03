@@ -7,6 +7,12 @@ struct node {
     struct node *rptr;
 };
 struct node *first = NULL;
+
+void display();
+void insertAtFirst(int x);
+void deleteAlt();
+void insertAtLast(int x);
+
 void main(){
     int ch,x;
     printf("Enter a choice:\n");
@@ -18,6 +24,7 @@ void main(){
                 printf("Enter the value to insert at first: ");
                 scanf("%d", &x);
                 insertAtFirst(x);
+                display();
                 break;
             case 2:
                 deleteAlt();
@@ -36,40 +43,42 @@ void main(){
         }
     }
 }
+
 void insertAtFirst(int x){
     struct node *newNode=(struct node*)malloc(sizeof(struct node));
     newNode->info = x;
+    newNode->lptr = NULL;
+    newNode->rptr = NULL;
     if(first == NULL){
-        newNode->lptr = NULL;
-        newNode->rptr = NULL;
+        first = newNode;
     } else {
         first->lptr = newNode;
-        newNode->lptr = NULL;
         newNode->rptr = first;
+        first=newNode;
     }
 }
+
 void deleteAlt(){
     if(first==NULL){
         printf("Empty List\n");
     }
     else{
-        struct node *save = first;
-        struct node *pred = NULL;
-        int a=0;
+        struct node *save=first;
+        int count=0;
         while(save!=NULL){
-            if(a%2==0){
-                while(a){
-                    save=save->rptr;
-                    a--;
+            struct node *next=save->rptr;
+            if(count%2==0){
+                if(save->lptr!=NULL){
+                    next->rptr=save->rptr;
                 }
-                pred=save->lptr;
-                pred->rptr=save->rptr;
-                save->rptr->lptr=pred;
-                free(save);
+                if(save->rptr!=NULL){
+                    next->lptr=save->lptr;
+                }
             }
         }
     }
 }
+
 void insertAtLast(int x){
     struct node *newNode=(struct node*)malloc(sizeof(struct node));
     newNode->info = x;
@@ -86,14 +95,16 @@ void insertAtLast(int x){
         newNode->lptr = save;
     }
 }
+
 void display(){
     if(first==NULL){
         printf("Empty List\n");
     } else {
         struct node *save = first;
         while(save != NULL){
-            printf("%d ", save->info);
+            printf("%d ->", save->info);
             save = save->rptr;
         }
+        printf("NULL");
     }
 }
