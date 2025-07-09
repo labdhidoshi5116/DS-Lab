@@ -45,16 +45,17 @@ void deleteNode(int x){
     if(first==NULL){
         printf("Empty List");
     }
-    else if(first->link==NULL){
+    else if(first->link==first){
         free(first);
         first=NULL;
     }
     else{
         struct node *save=first;
         struct node *pred=NULL;
+        
         while(x){
             pred=save;
-            save=save->link;
+            save=save->link; 
             x--;
         }
         pred->link = save->link;

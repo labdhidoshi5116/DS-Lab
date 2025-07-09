@@ -25,30 +25,30 @@ void display(){
         }
     }
 }
-void swap(){
-    if(first==NULL){
-        printf("Empty List");
-    }
-    else if(first->link==NULL){
-        printf("%d",first->info);
-    }
-    else{
-        struct node *prev=NULL;
-        struct node *save=first;
-        first=save->link;
-        while(save!=NULL && save->link!=NULL){
-            struct node *next=save->link;
-            struct node *afterNext=next->link;//next=save->link
-            next->link=save;
-            save->link=afterNext;
-            if(prev!=NULL){
-                prev->link=next;
+    void swap(){
+        if(first==NULL){
+            printf("Empty List");
+        }
+        else if(first->link==NULL){ 
+            printf("%d",first->info);
+        }
+        else{
+            struct node *prev=NULL;
+            struct node *save=first;
+            first=save->link;
+            while(save != NULL && save->link!=NULL){
+                struct node *next=save->link;
+                struct node *afterNext=next->link;//next=save->link
+                next->link=save;
+                save->link=afterNext;
+                if(prev!=NULL){
+                    prev->link=next;
+                }
+                prev=save;
+                save=afterNext;
             }
-            prev=save;
-            save=afterNext;
         }
     }
-}
 void main(){
     int ch,x;
     printf("Enter you choice:");
