@@ -1,28 +1,29 @@
 #include<stdio.h>
-void main(){
+void main()
+{
     int n;
-    printf("Enter number of elements:");
+    printf("Enter a number:");
     scanf("%d",&n);
-    int a[n+1];
-    for(int i=0;i<n;i++){
-        printf("Enter element:");
-        scanf("%d",&a[i]);
+    int a[n+1],temp, ins;
+    for(int i=0; i<n; i++)
+    {
+        printf("Enter a element:");
+        scanf("%d",& a[i]);
     }
-    int ins;
-    printf("Enter the element to be inserted:");
-    scanf("%d",&ins);
-    a[n]=ins;
-    for(int i=0;i<n;i++){
-        for(int j=0;j<=n;j++){
-            if(a[j+1]>a[j]){
-                int temp=a[j];
-                a[j]=a[j+1];
-                a[j+1]=temp;
-            }
-        }
+
+    printf("Enter the number to be inserted:");
+    scanf("%d",& ins);
+    int i;
+    for( i=0; i<n && a[i]<ins;i++);
+
+    temp = i;
+   for( i=n; i>=temp; i--)
+    {
+        a[i]=a[i-1];
     }
-    printf("Sorted Array");
-    for(int i=0;i<=n+1;i++){
-        printf("%d ",a[i]);
+    a[temp]=ins;
+    for(int j=0; j<n+1; j++)
+    {
+        printf("%d \n",a[j]);
     }
 }
