@@ -71,7 +71,7 @@ void convert_to_post(char infix[]){
         {
             char temp = pop();
             postfix[j++] = temp;
-            rank = rank + r(temp);
+            rank += r(temp);
             if(rank < 1){
                 printf("Invalid Expression");
                 return;
