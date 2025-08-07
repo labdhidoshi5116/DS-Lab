@@ -195,12 +195,12 @@ void main(){
             case 1:
                 printf("Enter value to insert: ");
                 scanf("%d", &x);
-                insert(x,root);
+                root = insert(x,root);
                 break;
                 case 2:
                 printf("Enter value to delete: ");
                 scanf("%d", &x);
-                delete(x,root);
+                root=delete(x,root);
                 break;
                 case 3:
                 printf("Enter value to search: ");
@@ -221,7 +221,6 @@ void main(){
                 printf("Postorder traversal: ");
                 postorder(root);
                 printf("\n");
-                break;
                 break;
                 case 7:
                 return;
