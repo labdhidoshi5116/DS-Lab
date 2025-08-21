@@ -16,7 +16,9 @@ struct Node* newNode(int data) {
 }
 
 struct Node* insert(struct Node* root, int data) {
-    if (root == NULL) return newNode(data);
+    if (root == NULL) {
+        return newNode(data);
+    }
     if (data < root->data)
         root->left = insert(root->left, data);
     else if (data > root->data)
@@ -24,13 +26,13 @@ struct Node* insert(struct Node* root, int data) {
     return root;
 }
 
-struct Node* findMin(struct Node* root) {
+struct Node* minFunc(struct Node* root) {
     while (root && root->left != NULL)
         root = root->left;
     return root;
 }
 
-struct Node* findMax(struct Node* root) {
+struct Node* maxFunc(struct Node* root) {
     while (root && root->right != NULL)
         root = root->right;
     return root;
@@ -46,8 +48,8 @@ void main() {
         scanf("%d", &val);
         root = insert(root, val);
     }
-    struct Node* minNode = findMin(root);
-    struct Node* maxNode = findMax(root);
+    struct Node* minNode = minFunc(root);
+    struct Node* maxNode = maxFunc(root);
     if (minNode) printf("Smallest element: %d\n", minNode->data);
     if (maxNode) printf("Largest element: %d\n", maxNode->data);
 }

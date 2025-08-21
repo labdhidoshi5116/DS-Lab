@@ -4,7 +4,7 @@
 struct Node {
     int data;
     struct Node *left;
-    struct node *right;
+    struct Node *right;
 };
 
 struct Node* newNode(int data) {
@@ -23,11 +23,14 @@ int search(int arr[], int start, int end, int value) {
 
 struct Node* constructTree(int pre[], int post[], int* preIndex, int l, int h, int size) {
     if (*preIndex >= size || l > h) return NULL;
-
+    if(pre[*preIndex]==0){
+        (*preIndex)++;
+        return NULL;
+    }
     struct Node* root = newNode(pre[*preIndex]);
     (*preIndex)++;
-
-    if (*preIndex < size && l <= h) {
+    
+    if (*preIndex < size && l < h) {
         int i = search(post, l, h, pre[*preIndex]);
         if (i <= h) {
             root->left = constructTree(pre, post, preIndex, l, i, size);
@@ -60,5 +63,8 @@ void main() {
 
     printf("Inorder traversal of constructed tree: ");
     inorder(root);
-    printf("\n");
+    // printf("\n");
+    // printf("%d",root->data);
+    // printf("%d",(root->left)->data);
+    // printf("%d",(root->right)->data);
 }
